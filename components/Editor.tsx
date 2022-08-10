@@ -4,7 +4,10 @@ interface EditorProps {}
 
 export const Editor: React.FC<EditorProps> = (props) => {
   useEffect(() => {
-    const editor = new EditorJS({ holder: "editor" });
+    const editor = new EditorJS({
+      holder: "editor",
+      placeholder: "Type your text...",
+    });
 
     return () => {
       editor.isReady.then(() => {
