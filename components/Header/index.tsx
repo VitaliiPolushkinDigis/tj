@@ -43,9 +43,11 @@ export const Header: React.FC = () => {
 
         <Link href="/write">
           <a>
-            <Button variant="contained" className={styles.penButton}>
-              Новая запись
-            </Button>
+            <a>
+              <Button variant="contained" className={styles.penButton}>
+                Новая запись
+              </Button>
+            </a>
           </a>
         </Link>
       </div>

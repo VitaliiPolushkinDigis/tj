@@ -4,12 +4,12 @@ import Link from 'next/link';
 
 interface CommentItemProps {
   user: {
-    id: number;
+    id: string;
     fullname: string;
   };
   text: string;
   post: {
-    id: number;
+    id: string;
     title: string;
   };
 }
