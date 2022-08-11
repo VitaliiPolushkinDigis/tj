@@ -1,16 +1,15 @@
-import React from "react";
-import Link from "next/link";
-import { Paper, Button, IconButton, Avatar } from "@material-ui/core";
+import React from 'react';
+import Link from 'next/link';
+import { Paper, Button, IconButton, Avatar } from '@material-ui/core';
 import {
   SearchOutlined as SearchIcon,
-  CreateOutlined as PenIcon,
   SmsOutlined as MessageIcon,
   Menu as MenuIcon,
   ExpandMoreOutlined as ArrowBottom,
   NotificationsNoneOutlined as NotificationIcon,
-} from "@material-ui/icons";
+} from '@material-ui/icons';
 
-import styles from "./Header.module.scss";
+import styles from './Header.module.scss';
 
 export const Header: React.FC = () => {
   return (
@@ -21,12 +20,7 @@ export const Header: React.FC = () => {
         </IconButton>
         <Link href="/">
           <a>
-            <img
-              height={35}
-              className="mr-20"
-              src="/static/img/logo.svg"
-              alt="Logo"
-            />
+            <img height={35} className="mr-20" src="/static/img/logo.svg" alt="Logo" />
           </a>
         </Link>
 
@@ -36,9 +30,11 @@ export const Header: React.FC = () => {
         </div>
 
         <Link href="/write">
-          <Button variant="contained" className={styles.penButton}>
-            Новая запись
-          </Button>
+          <a>
+            <Button variant="contained" className={styles.penButton}>
+              Новая запись
+            </Button>
+          </a>
         </Link>
       </div>
       <div className="d-flex align-center">
