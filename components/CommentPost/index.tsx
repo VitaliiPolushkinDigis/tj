@@ -6,7 +6,7 @@ import styles from './CommentPost.module.scss';
 
 interface CommentPostProps {
   user: {
-    fullname: string;
+    fullName: string;
   };
   text: string;
   post: {
@@ -41,7 +41,8 @@ export const CommentPost: React.FC<CommentPostProps> = ({ user, post, text }) =>
         elevation={3}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}>
+        onClose={handleClose}
+      >
         <MenuItem onClick={handleClose}>Удалить</MenuItem>
         <MenuItem onClick={handleClose}>Редактировать</MenuItem>
       </Menu>
