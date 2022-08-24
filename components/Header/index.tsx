@@ -17,7 +17,6 @@ import { useAppSelector } from '../../redux/hooks/hooks';
 export const Header: React.FC = () => {
   const [authVisible, setAuthVisible] = React.useState(false);
   const { data } = useAppSelector((state) => state.user);
-  console.log('data', data);
 
   const openAuthDialog = () => {
     setAuthVisible(true);
@@ -73,10 +72,12 @@ export const Header: React.FC = () => {
             </a>
           </Link>
         )}
-        <div className={styles.loginButton} onClick={openAuthDialog}>
-          <UserIcon />
-          Войти
-        </div>
+        {!data && (
+          <div className={styles.loginButton} onClick={openAuthDialog}>
+            <UserIcon />
+            Войти
+          </div>
+        )}
       </div>
       <AuthDialog onClose={closeAuthDialog} visible={authVisible} />
     </Paper>

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-
+import io, { Socket } from 'socket.io-client';
 import { Header } from '../components/Header';
 
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
@@ -8,9 +8,32 @@ import { theme } from '../theme';
 import '../styles/globals.scss';
 import 'macro-css';
 import { Provider } from 'react-redux';
-import { store } from '../redux/store';
+import { store, wrapper } from '../redux/store';
+import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }) {
+  const [socket, setSocket] = useState<Socket>();
+  const [messages, setMessages] = useState<string[]>([]);
+
+  const send = (value: string) => {
+    socket?.emit('message', value);
+  };
+
+  const messageListener = (message: string) => {
+    setMessages([...messages, message]);
+  };
+
+  useEffect(() => {
+    socket?.on('message', messageListener);
+    return () => {
+      socket?.off('message', messageListener);
+    };
+  }, [messageListener]);
+
+  useEffect(() => {
+    const newSocket = io('http://localhost:8001');
+    setSocket(newSocket);
+  }, [setSocket]);
   return (
     <>
       <Head>
@@ -21,18 +44,16 @@ function MyApp({ Component, pageProps }) {
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap"
           rel="stylesheet"
-        ></link>
+        />
       </Head>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
 
-        <Provider store={store}>
-          <Header />
-          <Component {...pageProps} />
-        </Provider>
+        <Header />
+        <Component {...pageProps} messages={messages} send={send} />
       </MuiThemeProvider>
     </>
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
