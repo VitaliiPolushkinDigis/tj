@@ -19,6 +19,10 @@ export const wsApi = messageApi.injectEndpoints({
           path: '/socket.io',
         });
 
+        socket.on('connect', () => {
+          console.log('socket connected on rtk query');
+        });
+
         socket.on('disconnect', (reason) => {
           if (reason === 'io server disconnect') {
             // the disconnection was initiated by the server, you need to reconnect manually
@@ -32,7 +36,6 @@ export const wsApi = messageApi.injectEndpoints({
           updateCachedData((draft) => {
             draft.push(event);
           });
-          console.log('test', event);
         });
 
         await cacheEntryRemoved;

@@ -4,8 +4,6 @@ import MessageInput from '../../components/Messages/MessageInput';
 import { MainLayout } from '../../layouts/MainLayout';
 
 export default function MessagesPage(props) {
-  console.log('prps', props);
-
   return (
     <MainLayout hideComments>
       <Paper className="p-20" elevation={0}>
