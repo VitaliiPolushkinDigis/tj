@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { useJoinRoomMutation, useSendMessageMutation } from '../../services/api/MessageService';
 
 interface MessageInputProps {
   send: (text: string) => void;
@@ -6,8 +7,18 @@ interface MessageInputProps {
 
 const MessageInput: FC<MessageInputProps> = ({ send }) => {
   const [value, setValue] = useState('');
+  const [sendMessage, dat] = useSendMessageMutation();
+  const [joinRoom] = useJoinRoomMutation();
   const handleSendClick = () => {
-    send(value);
+    console.log('data', dat);
+    sendMessage(value);
+    /*     send(value); */
+    setValue('');
+  };
+  const handleRoomClick = () => {
+    console.log('data', dat);
+    joinRoom(value);
+
     setValue('');
   };
   return (
@@ -21,6 +32,7 @@ const MessageInput: FC<MessageInputProps> = ({ send }) => {
         value={value}
       />
       <button onClick={handleSendClick}>Send</button>
+      <button onClick={handleRoomClick}>Create Room</button>
     </div>
   );
 };

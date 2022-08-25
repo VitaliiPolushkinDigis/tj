@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
   const [messages, setMessages] = useState<string[]>([]);
 
   const send = (value: string) => {
-    socket?.emit('message', value);
+    /*    socket?.emit('message', value); */
   };
 
   const messageListener = (message: string) => {
